@@ -1,4 +1,6 @@
-import java.util.UUID
+import java.util.*
+
+val uuid = UUID.randomUUID()
 
 fun main() {
     val uuid = UUID.randomUUID()

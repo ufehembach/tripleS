@@ -1,2 +1,2 @@
-class kniffel {
+class Kniffel {
 }

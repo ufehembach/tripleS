@@ -1,2 +1,2 @@
-class phase10 {
+class Phase10 {
 }
