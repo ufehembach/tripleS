@@ -26,12 +26,7 @@ class Users {
         for (i in
         0..(usersList.size - 1)) {
             myReturn += " " + i + " "
-            myReturn += usersList[i].name + "\t"
-            if (usersList[i].aktivated)
-                myReturn += " aktiv" + "\t"
-            else
-                myReturn += " Not aktiv" + "\t"
-            myReturn += " " + usersList[i].uuid + "\n"
+            myReturn += usersList[i].toString() + "\n"
         }
         return myReturn
     }

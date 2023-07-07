@@ -10,4 +10,15 @@ class User(var name: String){
 
     //var eMail: String = ""
     var aktivated: Boolean = true
+    override fun toString(): String {
+        var myReturn:String = ""
+        myReturn += name + "\t"
+        if (aktivated)
+            myReturn += " aktiv" + "\t"
+        else
+            myReturn += " Not aktiv" + "\t"
+        myReturn += " " + uuid + "\t"
+        myReturn += " " + addTime
+        return myReturn
+    }
 }

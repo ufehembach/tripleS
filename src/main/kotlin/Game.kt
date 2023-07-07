@@ -4,7 +4,7 @@ import java.util.*
 class Game {
     val uuid = UUID.randomUUID()
     var addTime = Date()
-    var rundenList: MutableList<Runde> = mutableListOf<Runde>()
+    var rundenList: MutableList<GGeneric> = mutableListOf<GGeneric>()
     var gameUsers: MutableList<User> = mutableListOf<User>()
 
     init {
@@ -14,17 +14,14 @@ class Game {
     var hochGewinnt = true
 
     override fun toString(): String {
-        var myReturn: String = ""
-//        rundenList.forEach {
-//            if (it.name != "Void") {
-//                myReturn += it.name + "\t"
-//                if (it.aktivated)
-//                    myReturn += " aktiv" + "\t"
-//                else
-//                    myReturn += " Not aktiv" + "\t"
-//                myReturn += " " + it.uuid + "\n"
-//            }
-//        }
+        var myReturn: String = returnUser()
+        gameUsers.forEach {
+            myReturn += it.toString() + "\n"
+        }
+        myReturn += returnRound()
+        rundenList.forEach {
+            myReturn += " " + it.toString() + "\n"
+        }
         return myReturn
     }
 
@@ -34,9 +31,10 @@ class Game {
             'A' to "add user to game",
             'P' to "play game",
             'Q' to "quit",
+            'S' to "Sum",
             '.' to "quit",
         )
-        var myPrompt: String = prompt + "U:"
+        var myPrompt: String = prompt + "G:" + uuid.hashCode().toString(16)
         var key: Char
         while (true) {
             print(myPrompt + ":")
@@ -45,16 +43,27 @@ class Game {
             when (key.uppercaseChar()) {
                 'H' -> showHelp(commands)
                 'L' -> print(this.toString())
-                'E' -> println("edit-not implemented")
+                'P' -> {
+                    var i: Int = 0
+                    println("los gehts...")
+                    while (true) {
+                        i++
+                        var myRunde: Runde = Runde()
+                        myRunde.spielRunde(gameUsers, myPrompt +
+                                "Runde "+ i + ":")
+                        rundenList.add(myRunde)
+                    }
+                }
+
                 'A' -> {
-                    println(" Which users play?, (x to finish)")
+                    println(" Which users play?, (. or Q to finish)")
                     println(usersInGame.toString())
                     var line: String = ""
                     var i: Int = 0
                     do {
                         print("  >")
                         line = readln()
-                        if (line == "x")
+                        if (line == "." || line == "Q" || line == "q")
                             break
                         try {
                             i = line.toInt()
@@ -71,10 +80,8 @@ class Game {
                                 )
                             }
                         }
-                        listUsers()
                     } while (true)
                 }
-
                 'q' -> return
                 '.' -> return
             }
