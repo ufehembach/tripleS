@@ -45,9 +45,10 @@ class Users {
         var key: Char
         while (true) {
             //  println(usersList)
+            var line : String =""
             print(myPrompt + ":")
             key = System.`in`.read().toChar()
-            readln()
+            line = readln()
             when (key.uppercaseChar()) {
                 'H' -> {
                     println("Help")
@@ -66,8 +67,13 @@ class Users {
 
                 'A' -> {
                     println("Add")
-                    print("Username: ")
-                    usersList.add(User(readln()))
+                    if (line.length>1)
+                        usersList.add(User(line.trim()))
+                    else
+                    {
+                        print("Username: ")
+                        usersList.add(User(readln()))
+                    }
                 }
 
                 'D' -> {

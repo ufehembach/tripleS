@@ -6,6 +6,7 @@ class Game {
     var addTime = Date()
     var rundenList: MutableList<GGeneric> = mutableListOf<GGeneric>()
     var gameUsers: MutableList<User> = mutableListOf<User>()
+    var selectedGame: Int = 0
 
     init {
         println("Game created")
@@ -29,15 +30,25 @@ class Game {
         var commands = linkedMapOf(
             'L' to "list current game",
             'A' to "add user to game",
+            'S' to "select game",
             'P' to "play game",
             'Q' to "quit",
-            'S' to "Sum",
+            'R' to "Show Results",
             '.' to "quit",
         )
-        var myPrompt: String = prompt + "G:" + uuid.hashCode().toString(16)
         var key: Char
         while (true) {
-            print(myPrompt + ":")
+            var thisGameName: String =
+                when (selectedGame) {
+                    1 -> "Kniffel"
+                    2 -> "Phase10"
+                    3 -> "Jassen"
+                    else -> "Generic"
+                }
+            var myPrompt: String = prompt + thisGameName + ":" + uuid
+                .hashCode()
+                .toString(16) + ":"
+            print(myPrompt)
             key = System.`in`.read().toChar()
             readln()
             when (key.uppercaseChar()) {
@@ -46,11 +57,19 @@ class Game {
                 'P' -> {
                     var i: Int = 0
                     println("los gehts...")
+                    var myRunde = GGeneric()
                     while (true) {
                         i++
-                        var myRunde: Runde = Runde()
-                        myRunde.spielRunde(gameUsers, myPrompt +
-                                "Runde "+ i + ":")
+                        when (selectedGame) {
+                            1 -> myRunde = GKniffel()
+                            2 -> myRunde = GPhase10()
+                            3 -> myRunde = GJassen()
+                            0 -> myRunde = GGeneric()
+                        }
+                        myRunde.spielRunde(
+                            gameUsers, myPrompt +
+                                    "Runde " + i + ":"
+                        )
                         rundenList.add(myRunde)
                     }
                 }
@@ -82,8 +101,34 @@ class Game {
                         }
                     } while (true)
                 }
+
                 'q' -> return
                 '.' -> return
+                'S' -> {
+                    var line: String = ""
+                    var i: Int = 0
+                    println(
+                        returnSelect()
+                    )
+                    println(
+                        "1. Kniffel\t2.Phase10\n3" +
+                                ".Jassen\tdefault:Generic"
+                    )
+                    line = readln()
+                    try {
+                        i = line.toInt()
+                    } catch (ex: Exception) {
+                        print("\b")
+                        i = 0
+                    }
+                    when (i) {
+                        1 -> println("Kniffel Selected")
+                        2 -> println("Phase10  Selected")
+                        3 -> println("Jassen Selected")
+                        0 -> println("Generil Selected")
+                    }
+                    selectedGame = i
+                }
             }
         }
     }
@@ -106,6 +151,5 @@ class Game {
 
     }
 }
-
 
 

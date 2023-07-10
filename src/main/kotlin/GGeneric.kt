@@ -1,19 +1,38 @@
 import java.util.*
 
-class GGeneric {
+open class GGeneric() {
     val uuid = UUID.randomUUID()
     var addTime = Date()
-    var listOfRults: MutableList<Int> = mutableListOf<Int>()
+    var listOfResults: MutableList<Int> = mutableListOf<Int>()
+    var rundenZaehler: Int = 0
 
     init {
-        println("Jassen created")
+        println("Generic Game created")
     }
 
     override fun toString(): String {
         return super.toString()
     }
 
-    fun spielRunde(spielers: MutableList<User>, prompt: String) {
+    open fun listRunde(spielers: MutableList<User>, prompt: String):
+            String {
+        var myReturn: String = ""
+        myReturn += rundenZaehler.toString()
+
+        spielers.forEach {
+            myReturn += " ." + it.name
+        }
+        return (myReturn)
+    }
+
+    open fun listGame(spielers: MutableList<User>, prompt: String) {
+
+    }
+
+    open fun spielRunde(
+        spielers: MutableList<User>,
+        prompt: String
+    ) {
         spielers.forEach {
             do {
                 var myPrompt: String = ""
@@ -22,13 +41,18 @@ class GGeneric {
                 var input: String
                 input = readln()
                 try {
-                    listOfRults.add(input.toInt())
+                    listOfResults.add(input.toInt())
                     break
                 } catch (ex: Exception) {
                     println("--> invalid: " + ex.localizedMessage)
                     continue
                 }
-            } while (true)
+            } while (!isGameOver())
         }
+        rundenZaehler++
+    }
+
+    open fun isGameOver(): Boolean {
+        return 1 == (1..10).random()
     }
 }
