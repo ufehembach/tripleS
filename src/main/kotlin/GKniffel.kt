@@ -1,3 +1,26 @@
+/*
+nur einser
+nur zweier
+nur dreier
+nur vierer
+nur fünfer
+nur secher
+gesamt
+bonus bei 63 oder mehr -> plus 35
+gesamter oberer teil
+
+dreierpasch alle augen
+viererpasch alle augen
+full-house 35 punkte (2+3)
+kleine strasse 30 Punkte (4 in der reihe)
+grosse strasse 40 punkte (5 in der reihe)
+kniffel 50 Punkte (5er pasch)
+chance alle augen zählen
+gesamt unterer teil
+gesamt oberer teil
+endsumme
+
+ */
 class GKniffel() : GGeneric() {
     init {
         println("Kniffel created")

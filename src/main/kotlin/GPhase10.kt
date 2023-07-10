@@ -1,3 +1,21 @@
+/*
+2 drillinge
+1 drilling und 1 viererfolge
+1 vierling und 1 viererfolge
+1 siebenerfolge
+1 achterfolge
+1 neunerfolge
+2 vierlinge
+7 karten einer farbe
+1 fünfling und 1 zwilling
+1 fünfling und 1 drilling
+
+    Karten von 1-9 zählen je 5 Punkte
+    Karten von 10-12 zählen je 10 Punkte
+    Aussetzen-Karten zählen je 15 Punkte
+    Joker zählen je 20 Punkte
+
+ */
 class GPhase10() : GGeneric() {
     init {
         println("Jassen created")
