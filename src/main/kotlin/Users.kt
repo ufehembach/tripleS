@@ -27,7 +27,7 @@ class Users {
         for (i in
         0..(usersList.size - 1)) {
             myReturn += " " + i + " "
-            myReturn += usersList[i].toString() + "\n"
+            myReturn += usersList[i].toString()+ "\n"
         }
         return myReturn
     }
@@ -94,10 +94,6 @@ class Users {
 
                 ('Q') -> {
                     println("quit")
-                    return
-                }
-                ('C') -> {
-                    clearScreen()
                     return
                 }
             }

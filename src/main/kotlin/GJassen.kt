@@ -66,48 +66,48 @@ class GJassen() : GGeneric() {
         myReturn += rundenZaehler.toString()
 
         listI = 0
-        myReturn += "\n Spieler\t "
+        myReturn += "\n Spieler\t"
         spielers.forEach()
         {
-            myReturn += " \t" + it.name
+            myReturn += " \t" + normalizeStringLeght(it.name)
         }
         listI = 0
-        myReturn += "\n Punkte \t "
+        myReturn += "\n Punkte \t"
         spielers.forEach()
         {
-            myReturn += " \t" + standX[rundenZaehler][listI++]
+            myReturn += " \t" + normalizeStringLeght(
+                standX[rundenZaehler][listI++].toString()
+            )
         }
         listI = 0
-        myReturn += "\n Säcke  \t "
+        myReturn += "\n Säcke  \t"
         spielers.forEach()
         {
-            myReturn += " \t" + standO[rundenZaehler][listI++]
+            myReturn += " \t" + normalizeStringLeght(standO[rundenZaehler][listI++].toString())
         }
         return (myReturn)
     }
 
     override fun toString(spielers: MutableList<User>, prompt: String)
             : String {
-        var myReturn: String = "Total\n"
+        var myReturn: String = "Total"
         var i: Int
-        for (i in 0..ergebnis.size) {
-            myReturn += "\n Spieler\t "
-            spielers.forEach()
-            {
-                myReturn += " \t" + it.name
-            }
-            listI = 0
-            myReturn += "\n Punkte\t "
-            spielers.forEach()
-            {
-                myReturn += ergebnis[listI++].toDouble().DecimalFormat
-                ("###.###")
-               // myReturn += " \t" + ergebnis[listI++]
-            }
+        myReturn += "\n Spieler\t "
+        spielers.forEach()
+        {
+            myReturn += " \t" + normalizeStringLeght(it.name)
+        }
+        listI = 0
+        myReturn += "\n Punkte \t "
+        spielers.forEach()
+        {
+            myReturn += " \t" + normalizeStringLeght(
+                ergebnis[listI++]
+                    .toString()
+            )
         }
         return (myReturn)
     }
-
 
     override fun spielRunde(
         spielers: MutableList<User>,
@@ -119,8 +119,10 @@ class GJassen() : GGeneric() {
             // punkte einlesen 
             do {
                 var myPrompt: String = ""
-                myPrompt = prompt + " Punkte für " + it.name + ":"
-                print(myPrompt)
+                myPrompt =
+                    prompt + ":" + "Rund " + rundenZaehler + 1 + ": Punkte" +
+                            " für " + it.name + ":"
+                print(myPrompt + ":")
                 var input: String
                 input = readln()
                 try {
@@ -163,7 +165,6 @@ class GJassen() : GGeneric() {
     override fun isGameOver(): Boolean {
         return ergebnis.max() == 5
     }
-
 }
 
 

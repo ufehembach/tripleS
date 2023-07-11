@@ -48,24 +48,23 @@ class Game {
                     3 -> "Jassen"
                     else -> "Generic"
                 }
-            var myPrompt: String = prompt + thisGameName + ":" + uuid
-                .hashCode()
-                .toString(16) + ":"
-            print(myPrompt)
+            var myPrompt: String = prompt + thisGameName + ":"
+            //+ uuid .hashCode() .toString(16)
+            print(myPrompt+":")
             key = System.`in`.read().toChar()
             readln()
             when (key.uppercaseChar()) {
                 'H' -> showHelp(commands)
-                'L' -> print(ergebnis.toString())
+                'L' -> print(ergebnis.toString(users,myPrompt))
                 'P' -> {
                     if (users.size > 0) {
                         started = true
                         ergebnis.spielRunde(users, myPrompt)
                     } else
                         println("No Players, use <a> first")
+                    println(ergebnis.toString(users, myPrompt))
                     if (ergebnis.isGameOver())
                         println("Game over")
-                    println(ergebnis.toString(users,myPrompt))
                 }
 
                 'A' -> {

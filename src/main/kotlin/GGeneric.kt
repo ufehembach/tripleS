@@ -15,7 +15,7 @@ open class GGeneric() {
         spielers: MutableList<User>,
         prompt: String
     ): String {
-        return super.toString()
+        return ""
     }
 
     open fun listRunde(spielers: MutableList<User>, prompt: String):

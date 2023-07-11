@@ -13,7 +13,7 @@ class User(var name: String){
     var aktivated: Boolean = true
     override fun toString(): String {
         var myReturn:String = ""
-        myReturn += name + "\t"
+        myReturn += normalizeStringLeght(name) + "\t"
         if (aktivated)
             myReturn += " aktiv" + "\t"
         else
