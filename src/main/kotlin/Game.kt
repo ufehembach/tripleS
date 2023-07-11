@@ -1,12 +1,17 @@
 import java.security.KeyStore.TrustedCertificateEntry
 import java.util.*
+import java.time.*
 
 class Game {
     val uuid = UUID.randomUUID()
-    var addTime = Date()
-    var rundenList: MutableList<GGeneric> = mutableListOf<GGeneric>()
-    var gameUsers: MutableList<User> = mutableListOf<User>()
+    var addTime = LocalDateTime.now()
+    var ergebnis: GGeneric = GGeneric()
+    var users: MutableList<User> = mutableListOf<User>()
     var selectedGame: Int = 0
+    var selectedUsers: Int = 0
+    var started: Boolean = false
+    var name: String = ""
+    var runde: Int = 0
 
     init {
         println("Game created")
@@ -16,13 +21,11 @@ class Game {
 
     override fun toString(): String {
         var myReturn: String = returnUser()
-        gameUsers.forEach {
+        users.forEach {
             myReturn += it.toString() + "\n"
         }
         myReturn += returnRound()
-        rundenList.forEach {
-            myReturn += " " + it.toString() + "\n"
-        }
+        myReturn += ergebnis.toString()
         return myReturn
     }
 
@@ -53,28 +56,23 @@ class Game {
             readln()
             when (key.uppercaseChar()) {
                 'H' -> showHelp(commands)
-                'L' -> print(this.toString())
+                'L' -> print(ergebnis.toString())
                 'P' -> {
-                    var i: Int = 0
-                    println("los gehts...")
-                    var myRunde = GGeneric()
-                    while (true) {
-                        i++
-                        when (selectedGame) {
-                            1 -> myRunde = GKniffel()
-                            2 -> myRunde = GPhase10()
-                            3 -> myRunde = GJassen()
-                            0 -> myRunde = GGeneric()
-                        }
-                        myRunde.spielRunde(
-                            gameUsers, myPrompt +
-                                    "Runde " + i + ":"
-                        )
-                        rundenList.add(myRunde)
-                    }
+                    if (users.size > 0) {
+                        started = true
+                        ergebnis.spielRunde(users, myPrompt)
+                    } else
+                        println("No Players, use <a> first")
+                    if (ergebnis.isGameOver())
+                        println("Game over")
+                    println(ergebnis.toString(users,myPrompt))
                 }
 
                 'A' -> {
+                    if (started) {
+                        println("Game Started, no changes can be applied")
+                        break
+                    }
                     println(" Which users play?, (. or Q to finish)")
                     println(usersInGame.toString())
                     var line: String = ""
@@ -91,8 +89,12 @@ class Game {
                             continue
                         }
                         if (i < usersInGame.usersList.size) {
-                            if (!gameUsers.contains(usersInGame.usersList[i])) {
-                                gameUsers.add(usersInGame.usersList[i])
+                            if (!users.contains(
+                                    usersInGame
+                                        .usersList[i]
+                                )
+                            ) {
+                                users.add(usersInGame.usersList[i])
                                 println(
                                     "\tadded " + i + " " + usersInGame
                                         .usersList[i]
@@ -105,14 +107,18 @@ class Game {
                 'q' -> return
                 '.' -> return
                 'S' -> {
+                    if (started) {
+                        println("Game Started, no changes can be applied")
+                        break
+                    }
                     var line: String = ""
                     var i: Int = 0
                     println(
                         returnSelect()
                     )
                     println(
-                        "1. Kniffel\t2.Phase10\n3" +
-                                ".Jassen\tdefault:Generic"
+                        "1. Kniffel\t2. Phase10\n" +
+                                "3. Jassen\t default:Generic"
                     )
                     line = readln()
                     try {
@@ -122,10 +128,25 @@ class Game {
                         i = 0
                     }
                     when (i) {
-                        1 -> println("Kniffel Selected")
-                        2 -> println("Phase10  Selected")
-                        3 -> println("Jassen Selected")
-                        0 -> println("Generil Selected")
+                        1 -> {
+                            println("Kniffel Selected")
+                            ergebnis = GKniffel()
+                        }
+
+                        2 -> {
+                            println("Phase10  Selected")
+                            ergebnis = GPhase10()
+                        }
+
+                        3 -> {
+                            println("Jassen Selected")
+                            ergebnis = GJassen()
+                        }
+
+                        0 -> {
+                            println("Generic Selected")
+                            ergebnis = GGeneric()
+                        }
                     }
                     selectedGame = i
                 }
@@ -136,7 +157,7 @@ class Game {
     fun listUsers() {
         var ii: Int = 0
         var myReturn: String = ""
-        gameUsers.forEach {
+        users.forEach {
             myReturn += " " + ii++ + " "
             myReturn += it.name + "\t"
             if (it.aktivated)
@@ -153,3 +174,22 @@ class Game {
 }
 
 
+/* parking lot
+                     var i: Int = -1
+                    println("los gehts...")
+                    var myRunde = GGeneric()
+                    while (true) {
+                        i++
+                        when (selectedGame) {
+                            0 -> myRunde = GKniffel()
+                            1 -> myRunde = GPhase10()
+                            2 -> myRunde = GJassen()
+                            -1 -> myRunde = GGeneric()
+                        }
+                        myRunde.spielRunde(
+                            gameUsers, myPrompt +
+                                    "Runde " + i + ":"
+                        )
+                        rundenList.add(myRunde)
+                    }
+ */

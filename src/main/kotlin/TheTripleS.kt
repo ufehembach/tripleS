@@ -1,9 +1,10 @@
+import java.time.*
 import java.util.*
 import kotlin.system.exitProcess
 
 class TheTripleS {
     val uuid = UUID.randomUUID()
-    var addTime = Date()
+    var addTime = LocalDateTime.now()
     open var games: MutableList<Game> = mutableListOf<Game>()
     var users: Users = Users()
     var dice: Dice=Dice()

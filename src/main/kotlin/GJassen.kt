@@ -1,4 +1,6 @@
+import java.text.DecimalFormat
 import java.util.*
+
 /*
 36 karten
 VI
@@ -33,41 +35,88 @@ kreuz
 \  /
   X
 /  \
-o
+oooo
+
+user              u1    u2
+r1  +punkt        1      0
+    -punkt(sack)  0      0
+r2                0      1
+                  0      0
+r3                0      1
+                  1      0
+ergebnis      =summe(gewinne) - summe säcke > 5
  */
 class GJassen() : GGeneric() {
+    //var standX: MutableList<Array<Int>> = mutableListOf()
+    // var standO: MutableList<Array<Int>> = mutableListOf()
+    var standX: MutableList<MutableList<Int>> = mutableListOf()
+    var standO: MutableList<MutableList<Int>> = mutableListOf()
+    var listI: Int = 0
+    var ergebnis: MutableList<Int> = mutableListOf()
 
     init {
         println("Jassen created")
     }
 
-    override fun toString(): String {
-        return super.toString()
-    }
 
     override fun listRunde(
-        spielers: MutableList<User>,
-        prompt: String
+        spielers: MutableList<User>, prompt: String
     ): String {
-        var myReturn: String = ""
+        var myReturn: String = "Runde "
         myReturn += rundenZaehler.toString()
 
-//        spielers.forEach()
-//        {
-//            myReturn += " ." + it.Name
-//        }
+        listI = 0
+        myReturn += "\n Spieler\t "
+        spielers.forEach()
+        {
+            myReturn += " \t" + it.name
+        }
+        listI = 0
+        myReturn += "\n Punkte \t "
+        spielers.forEach()
+        {
+            myReturn += " \t" + standX[rundenZaehler][listI++]
+        }
+        listI = 0
+        myReturn += "\n Säcke  \t "
+        spielers.forEach()
+        {
+            myReturn += " \t" + standO[rundenZaehler][listI++]
+        }
         return (myReturn)
     }
 
-    override fun listGame(spielers: MutableList<User>, prompt: String) {
-
+    override fun toString(spielers: MutableList<User>, prompt: String)
+            : String {
+        var myReturn: String = "Total\n"
+        var i: Int
+        for (i in 0..ergebnis.size) {
+            myReturn += "\n Spieler\t "
+            spielers.forEach()
+            {
+                myReturn += " \t" + it.name
+            }
+            listI = 0
+            myReturn += "\n Punkte\t "
+            spielers.forEach()
+            {
+                myReturn += ergebnis[listI++].toDouble().DecimalFormat
+                ("###.###")
+               // myReturn += " \t" + ergebnis[listI++]
+            }
+        }
+        return (myReturn)
     }
+
 
     override fun spielRunde(
         spielers: MutableList<User>,
         prompt: String
     ) {
+        val listX = mutableListOf<Int>()
+        val listO = mutableListOf<Int>()
         spielers.forEach {
+            // punkte einlesen 
             do {
                 var myPrompt: String = ""
                 myPrompt = prompt + " Punkte für " + it.name + ":"
@@ -75,7 +124,8 @@ class GJassen() : GGeneric() {
                 var input: String
                 input = readln()
                 try {
-                    listOfResults.add(input.toInt())
+                    var i: Int = input.toInt()
+                    listX.add(i)
                     break
                 } catch (ex: Exception) {
                     println("--> invalid: " + ex.localizedMessage)
@@ -83,10 +133,37 @@ class GJassen() : GGeneric() {
                 }
             } while (true)
         }
+        // spiellogik wer hat gewonnen und wer ist im Sack
+        val max = listX.maxOrNull()
+        for (listI in 0..listX.size - 1) {
+            if (listX[listI] < 20) //SACK
+            {
+                listX[listI] = 0
+                listO.add(1)
+            } else
+                listO.add(0)
+            if (listX[listI] == max)
+                listX[listI] = 1
+            else
+                listX[listI] = 0
+        }
+        standX.add(listX)
+        standO.add(listO)
+        println(listRunde(spielers, prompt))
+        // gesamtergebnis berechnen
+        for (listI in 0..listX.size - 1) {
+            if (rundenZaehler == 0) {
+                ergebnis.add(0)
+            }
+            ergebnis[listI] += listX[listI] - listO[listI]
+        }
         rundenZaehler++
     }
 
     override fun isGameOver(): Boolean {
-        return 1 == (1..10).random()
+        return ergebnis.max() == 5
     }
+
 }
+
+

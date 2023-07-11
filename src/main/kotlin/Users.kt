@@ -1,9 +1,10 @@
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.system.exitProcess
 
 class Users {
     val uuid = UUID.randomUUID()
-    var addTime = Date()
+    var addTime = LocalDateTime.now()
     var usersList: MutableList<User> = mutableListOf<User>()
 
     init {

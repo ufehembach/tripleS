@@ -1,9 +1,10 @@
+import java.time.LocalDateTime
 import java.util.*
 
 class User(var name: String){
 
     val uuid = UUID.randomUUID()
-    val addTime = Date()
+    val addTime = LocalDateTime.now()
     init{
         println("Created User >"+this.name+"<")
     }

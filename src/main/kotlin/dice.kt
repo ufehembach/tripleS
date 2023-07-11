@@ -24,7 +24,7 @@ class Dice ()
     fun doDice()
     {
         var i: Int = 0
-        for (i in 0..this.numberOfDices)
+        for (i in 0..this.numberOfDices-1)
             println(diceSymbols.random())
     }
 }
