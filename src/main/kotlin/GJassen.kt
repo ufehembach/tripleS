@@ -120,7 +120,8 @@ class GJassen() : GGeneric() {
             do {
                 var myPrompt: String = ""
                 myPrompt =
-                    prompt + ":" + "Rund " + rundenZaehler + 1 + ": Punkte" +
+                    prompt + ":" + "Runde " + rundenZaehler + 1 + ": " +
+                            "Punkte" +
                             " für " + it.name + ":"
                 print(myPrompt + ":")
                 var input: String

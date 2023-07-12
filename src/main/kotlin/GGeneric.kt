@@ -59,6 +59,10 @@ open class GGeneric() {
     open fun isGameOver(): Boolean {
         return 1 == (1..10).random()
     }
+    open fun addDataStructure()
+    {
+        print("")
+    }
 }
 
 

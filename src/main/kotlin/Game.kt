@@ -98,6 +98,7 @@ class Game {
                                     "\tadded " + i + " " + usersInGame
                                         .usersList[i]
                                 )
+                                ergebnis.addDataStructure()
                             }
                         }
                     } while (true)
@@ -134,7 +135,9 @@ class Game {
 
                         2 -> {
                             println("Phase10  Selected")
-                            ergebnis = GPhase10()
+                            //  ergebnis = GPhase10()
+                            println("Not Implemented yet! \nPlease try " +
+                                    "again.")
                         }
 
                         3 -> {
@@ -170,6 +173,7 @@ class Game {
     fun listGameStand() {
 
     }
+
 }
 
 
