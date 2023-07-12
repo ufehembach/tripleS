@@ -20,7 +20,7 @@ class TheTripleS {
             'Q' to "quit",
             '.' to "quit",
             'D' to "Dice",
-            'S' to "set # of Dice",
+            'N' to "set # of Dice",
             'G' to "Play Game",
         )
         var prompt: String = "3S:"
@@ -47,7 +47,7 @@ class TheTripleS {
                     myGame.commands(prompt,users)
                 }
                 'U' -> users.commands(prompt)
-                'S' -> {
+                'N' -> {
                     try{
                         print("Number of Dices?")
                         var noOfDices:String = readln()

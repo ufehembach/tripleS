@@ -49,6 +49,7 @@ ___) |  __/ |  __/ (__| |_|_|
  """.trimIndent()
 }
 
+// Kindly provided by Gordon
 fun normalizeStringLeght(str: String, len: Int = 10): String {
     return if (str.length < len)
         str.padStart(len, ' ')

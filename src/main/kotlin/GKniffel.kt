@@ -66,69 +66,172 @@ class GKniffel() : GGeneric() {
             println(number)
             when (key.uppercaseChar()) {
                 '1' -> {
-                    stand[spielerI][0] = number
-                    break
+                    if (stand[spielerI][0] == -1)
+                    {
+                        stand[spielerI][0] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 '2' -> {
-                    stand[spielerI][1] = number
-                    break
+                    if (stand[spielerI][1] == -1)
+                    {
+                        stand[spielerI][1] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 '3' -> {
-                    stand[spielerI][2] = number
-                    break
+                    if (stand[spielerI][2] == -1)
+                    {
+                        stand[spielerI][2] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 '4' -> {
-                    stand[spielerI][3] = number
-                    break
+                    if (stand[spielerI][3] == -1)
+                    {
+                        stand[spielerI][3] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 '5' -> {
-                    stand[spielerI][4] = number
-                    break
+                    if (stand[spielerI][4] == -1)
+                    {
+                        stand[spielerI][4] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 '6' -> {
-                    stand[spielerI][5] = number
-                    break
+                    if (stand[spielerI][5] == -1)
+                    {
+                        stand[spielerI][5] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 'D' -> {
-                    stand[spielerI][6] = number
-                    break
+                    if (stand[spielerI][6] == -1)
+                    {
+                        stand[spielerI][6] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 'V' -> {
-                    stand[spielerI][7] = number
-                    break
+                    if (stand[spielerI][7] == -1)
+                    {
+                        stand[spielerI][7] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 'F' -> {
-                    stand[spielerI][8] = number
-                    break
+                    if (stand[spielerI][8] == -1)
+                    {
+                        stand[spielerI][8] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 'S' -> {
-                    stand[spielerI][9] = number
-                    break
+                    if (stand[spielerI][9] == -1)
+                    {
+                        stand[spielerI][9] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 'G' -> {
-                    stand[spielerI][10] = number
-                    break
+                    if (stand[spielerI][10] == -1)
+                    {
+                        stand[spielerI][10] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 'K' -> {
-                    stand[spielerI][11] = number
-                    break
+                    if (stand[spielerI][11] == -1)
+                    {
+                        stand[spielerI][11] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 'C' -> {
-                    stand[spielerI][12] = number
-                    break
-
+                    if (stand[spielerI][12] == -1)
+                    {
+                        stand[spielerI][12] = number
+                        break
+                    }
+                    else
+                    {
+                        println("  already set! -> try again")
+                        continue
+                    }
                 }
 
                 else -> {
@@ -160,35 +263,9 @@ class GKniffel() : GGeneric() {
     override fun listRunde(
         spielers: MutableList<User>, prompt: String
     ): String {
-        var myReturn: String = "Runde "
-        myReturn += rundenZaehler.toString()
-
-//        listI = 0
-//        myReturn += "\n Spieler\t"
-//        spielers.forEach()
-//        {
-//            myReturn += " \t" + normalizeStringLeght(it.name)
-//        }
-//        listI = 0
-//        myReturn += "\n Punkte \t"
-//        spielers.forEach()
-//        {
-//            myReturn += " \t" + normalizeStringLeght(
-//                //     standX[rundenZaehler][listI++].toString()
-//                ""
-//            )
-//        }
-//        listI = 0
-//        myReturn += "\n Säcke  \t"
-//        spielers.forEach()
-//        {
-//            //myReturn += " \t" + normalizeStringLeght
-//            // myReturn += " \t" + normalizeStringLeght
-//            // (standO[rundenZaehler][listI++].toString())
-//            myReturn += " \t" + normalizeStringLeght("")
-//        }
-        return (myReturn)
+        return (toString(spielers, prompt))
     }
+
 
     fun hauEineZeileRaus(
         text: String,
@@ -199,28 +276,38 @@ class GKniffel() : GGeneric() {
     ): String {
         var myReturn: String = ""
         var myI: Int = 0
+        var spieler: User
+        myReturn += normalizeStringLeght(text, 14)
         spielers.forEach {
-            myReturn += normalizeStringLeght(text, 14) +
-                    normalizeStringLeght(stand[myI][row].toString())
-            results[myI] += stand[myI][row]
+            myReturn += normalizeStringLeght(
+                if (stand[myI][row] == -1)
+                    "."
+                else {
+                    stand[myI][row]
+                        .toString()
+                }
+            )
+            if (stand[myI][row] != -1)
+                results[myI] += stand[myI][row]
             myI++
         }
-        return myReturn
+        return myReturn + "\n"
     }
 
     override fun toString(
         spielers: MutableList<User>,
         prompt: String
     ): String {
-        var myReturn: String = "Total"
-        myReturn += "\n Spieler\t "
+        var myReturn: String = " Total\n"
+        myReturn += normalizeStringLeght("Spieler", 14)
         var results: MutableList<Int> = mutableListOf()
         spielers.forEach()
         {
-            myReturn += " \t" + normalizeStringLeght(it.name)
+            myReturn += normalizeStringLeght(it.name)
             results.add(0)
         }
-        var i: Int=0
+        myReturn += "\n"
+        var i: Int = 0
 //nur einser
         myReturn += hauEineZeileRaus(
             "nur einser",
@@ -232,7 +319,7 @@ class GKniffel() : GGeneric() {
 //nur zweier
         myReturn += hauEineZeileRaus(
             "nur zweier",
-                    spielers,
+            spielers,
             stand,
             i++,
             results
@@ -240,7 +327,7 @@ class GKniffel() : GGeneric() {
 //nur dreier
         myReturn += hauEineZeileRaus(
             "nur dreier",
-                    spielers,
+            spielers,
             stand,
             i++,
             results
@@ -248,7 +335,7 @@ class GKniffel() : GGeneric() {
 //nur vierer
         myReturn += hauEineZeileRaus(
             "nur vierer",
-                    spielers,
+            spielers,
             stand,
             i++,
             results
@@ -270,10 +357,36 @@ class GKniffel() : GGeneric() {
             results
         )
 //gesamt
+        myReturn += (normalizeStringLeght("-------------------------", 14))
+        spielers.forEachIndexed { index, user ->
+            myReturn += (normalizeStringLeght
+                ("---------------------"))
+        }
+        myReturn += "\n"
 //bonus bei 63 oder mehr -> plus 35
+        myReturn += (normalizeStringLeght("bonus bei > 63", 14))
+        spielers.forEachIndexed { index, user ->
+            if (results[index] > 63) {
+                results[index] += 35
+                myReturn += (normalizeStringLeght("35"))
+            } else
+                myReturn += (normalizeStringLeght("00"))
+        }
+        myReturn += "\n"
 //gesamter oberer teil
-//
+        myReturn += (normalizeStringLeght("gesamt oberer teil", 14))
+        spielers.forEachIndexed { index, user ->
+            myReturn += (normalizeStringLeght(results[index].toString()))
+        }
+        myReturn += "\n"
+        myReturn += (normalizeStringLeght("-------------------------", 14))
+        spielers.forEachIndexed { index, user ->
+            myReturn += (normalizeStringLeght
+                ("---------------------"))
+        }
+        myReturn += "\n"
 //dreierpasch alle augen
+
         myReturn += hauEineZeileRaus(
             "dreier pasch",
             spielers,
@@ -284,7 +397,7 @@ class GKniffel() : GGeneric() {
 //viererpasch alle augen
         myReturn += hauEineZeileRaus(
             "viererpasch",
-                    spielers,
+            spielers,
             stand,
             i++,
             results
@@ -292,7 +405,7 @@ class GKniffel() : GGeneric() {
 //full-house 35 punkte (2+3)
         myReturn += hauEineZeileRaus(
             "full house",
-                    spielers,
+            spielers,
             stand,
             i++,
             results
@@ -332,6 +445,17 @@ class GKniffel() : GGeneric() {
 //gesamt unterer teil
 //gesamt oberer teil
 //endsumme
+        myReturn += (normalizeStringLeght("-------------------------", 14))
+        spielers.forEachIndexed { index, user ->
+            myReturn += (normalizeStringLeght
+                ("---------------------"))
+        }
+        myReturn += "\n"
+        myReturn += (normalizeStringLeght("endsumme", 14))
+        spielers.forEachIndexed { index, user ->
+            myReturn += (normalizeStringLeght(results[index].toString()))
+        }
+        myReturn += "\n"
         return (myReturn)
     }
 

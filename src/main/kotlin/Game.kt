@@ -12,6 +12,7 @@ class Game {
     var started: Boolean = false
     var name: String = ""
     var runde: Int = 0
+    var dice: Dice=Dice()
 
     init {
         println("Game created")
@@ -36,7 +37,8 @@ class Game {
             'S' to "select game",
             'P' to "play game",
             'Q' to "quit",
-            'R' to "Show Results",
+            'D' to "Dice",
+            'N' to "set # of Dice",
             '.' to "quit",
         )
         var key: Char
@@ -50,12 +52,12 @@ class Game {
                 }
             var myPrompt: String = prompt + thisGameName + ":"
             //+ uuid .hashCode() .toString(16)
-            print(myPrompt+":")
+            print(myPrompt + ":")
             key = System.`in`.read().toChar()
             readln()
             when (key.uppercaseChar()) {
                 'H' -> showHelp(commands)
-                'L' -> print(ergebnis.toString(users,myPrompt))
+                'L' -> print(ergebnis.toString(users, myPrompt))
                 'P' -> {
                     if (users.size > 0) {
                         started = true
@@ -106,6 +108,20 @@ class Game {
 
                 'q' -> return
                 '.' -> return
+                'D' -> dice.doDice()
+                'N' -> {
+                    try {
+                        print("Number of Dices?")
+                        var noOfDices: String = readln()
+                        dice.numberOfDices = noOfDices.toInt()
+                    } catch (ex: Exception) {
+                        println(
+                            "Sorry, invalid input(" + ex.localizedMessage
+                                    + "), nothing set!"
+                        )
+                    }
+                }
+
                 'S' -> {
                     if (started) {
                         println("Game Started, no changes can be applied")
@@ -136,8 +152,10 @@ class Game {
                         2 -> {
                             println("Phase10  Selected")
                             //  ergebnis = GPhase10()
-                            println("Not Implemented yet! \nPlease try " +
-                                    "again.")
+                            println(
+                                "Not Implemented yet! \nPlease try " +
+                                        "again."
+                            )
                         }
 
                         3 -> {
