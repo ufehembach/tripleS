@@ -27,7 +27,7 @@ bei den Regeln
     * Beliebig viele Spieler
     * Beliebig viele Spiele (Durch Klassen einfach zum Spiel hinzuzufügen)
     * Beliebig viele Runden
-    * Spielhistorie durch Abspeichern aller Spiele und laden bei 
+    * Spielhistorie durch Abspeichern aller Spiele und Laden bei 
       Systemstart mit z.B. Jason (to do)
     * Export der Daten in CSV oÄ (to do)
     * Auswertungsmöglichkeiten über Spiele und Gesamt (to do)
@@ -81,6 +81,8 @@ es gibt 36 karten in 4 Farben:
 * wenn man in einer Runde unter 20 Punkte hat, bekommt man einen Sack,
   der mit einem Kreis unter dem X markiert wird
 * durch einen Sieg kann man einen Sack streichen (sind also Minus Punkte)
+* Auf dem X kann man 5 Siege markieren (jede Ecke und die Mitte), daher 
+  ist der Erste, der fünf Siege hat Gesamtsieger, wenn er keinen Sack hat.
 
 Ansicht einer anfgefangenen JASS Runde auf Papier
 ![](JassAufPapier.jpg)
@@ -88,7 +90,7 @@ Ansicht einer anfgefangenen JASS Runde auf Papier
 wir sehen hier: Uwe hat einen Punkt, kata einen Sack  
 (Die Ausgabe ist zur Zeit leider nur mit Zahlen, das Ausdrucken des X 
 mit Kotlin auf der Konsole war dann schnell zu unübersichtlich und 
-zeitraubend,siehe auch  [Challenges](#4-challenges)
+zeitraubend,siehe auch  [Challenges](#4-challenges))
 ----
    
 # Kniffel
@@ -130,7 +132,7 @@ grosse strasse         .         .         .
 ```
 ----
 Phase 10 - Not implemented yet
----
+----  
 
 # 4. Challenges
  * Die Datenstruktur ist sehr unübersichtlich und nicht gut gewählt. Dies
