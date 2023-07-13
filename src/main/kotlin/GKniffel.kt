@@ -263,7 +263,8 @@ class GKniffel() : GGeneric() {
     override fun listRunde(
         spielers: MutableList<User>, prompt: String
     ): String {
-        return (toString(spielers, prompt))
+        // return (toString(spielers, prompt))
+        return ""
     }
 
 
